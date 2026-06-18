@@ -128,9 +128,13 @@ nav button.active{color:#ffcc00;border-bottom:3px solid #ffcc00}
     <input id="nome" placeholder="👤 Seu nome">
     <input id="telefone" placeholder="📞 Telefone">
   </div>
+  
   <div class="form-full">
     <input id="endereco" placeholder="📍 Endereço completo (rua, nº, bairro)">
   </div>
+  <div class="form-full">
+  <input id="observacao" placeholder="📝 Observação (ex: sem cebola, sem tomate...)">
+</div>
 
   <div class="payment-opts">
     <label><input type="radio" name="pgto" value="Dinheiro"> 💵 Dinheiro</label>
@@ -274,7 +278,9 @@ function enviarPedido() {
   const nome = document.getElementById("nome").value.trim();
   const tel = document.getElementById("telefone").value.trim();
   const endereco = document.getElementById("endereco").value.trim();
+  const observacao = document.getElementById("observacao").value.trim();
   const pgto = getPagamento();
+  
 
   if (!nome || !tel || !endereco || !pgto || cart.length === 0) {
     alert("Preencha todos os campos, escolha a forma de pagamento e adicione ao menos um item!");
@@ -289,6 +295,9 @@ function enviarPedido() {
   txt += "👤 *Cliente:* " + nome + "%0A";
   txt += "📞 *Telefone:* " + tel + "%0A";
   txt += "📍 *Endereço:* " + endereco + "%0A";
+  if (observacao) {
+  txt += "📝 *Observação:* " + observacao + "%0A";
+}
   txt += "💳 *Pagamento:* " + pgto + "%0A%0A";
   txt += "🛒 *Itens:*%0A";
   cart.forEach(i => txt += "- " + i.nome + " (" + r(i.preco) + ")%0A");
