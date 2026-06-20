@@ -233,17 +233,17 @@ function getPagamento() {
   const sel = document.querySelector('input[name="pgto"]:checked');
   return sel ? sel.value : null;
 }
-
-function salvarPedido(nome, tel, endereco, pgto, itens, total) {
+function salvarPedido(nome, tel, endereco, observacao, pgto, itens, total) {
   const pedidos = JSON.parse(localStorage.getItem('pedidos') || '[]');
   pedidos.unshift({
     id: Date.now(),
-    nome, tel, endereco, pgto, itens,
+    nome, tel, endereco, observacao, pgto, itens,
     total,
     hora: new Date().toLocaleString('pt-BR')
   });
   localStorage.setItem('pedidos', JSON.stringify(pedidos));
 }
+
 
 function renderPedidos() {
   const lista = document.getElementById("lista-pedidos");
@@ -260,11 +260,13 @@ function renderPedidos() {
       </div>
       <div class="ped-info">📞 ${p.tel}</div>
       <div class="ped-info">📍 ${p.endereco}</div>
+      ${p.observacao ? `<div class="ped-obs" style="color:#ffaa00; font-style:italic; margin:4px 0; font-size:12px;">📝 Obs: ${p.observacao}</div>` : ''}
       <div class="ped-pagamento">💳 ${p.pgto}</div>
       <div class="ped-info" style="margin-top:5px">${p.itens.map(i => '• ' + i.nome).join('<br>')}</div>
       <div class="ped-total">Total: R$ ${p.total.toFixed(2).replace('.',',')}</div>
     </div>
   `).join('');
+}
 }
 
 function limparPedidos() {
@@ -280,7 +282,6 @@ function enviarPedido() {
   const endereco = document.getElementById("endereco").value.trim();
   const observacao = document.getElementById("observacao").value.trim();
   const pgto = getPagamento();
-  
 
   if (!nome || !tel || !endereco || !pgto || cart.length === 0) {
     alert("Preencha todos os campos, escolha a forma de pagamento e adicione ao menos um item!");
@@ -289,15 +290,15 @@ function enviarPedido() {
 
   const total = cart.reduce((s, i) => s + i.preco, 0);
 
-  salvarPedido(nome, tel, endereco, pgto, cart, total);
+  salvarPedido(nome, tel, endereco, observacao, pgto, cart, total);
 
   let txt = "📦 *Pedido - Chinaglia Lanches 2*%0A%0A";
   txt += "👤 *Cliente:* " + nome + "%0A";
   txt += "📞 *Telefone:* " + tel + "%0A";
   txt += "📍 *Endereço:* " + endereco + "%0A";
   if (observacao) {
-  txt += "📝 *Observação:* " + observacao + "%0A";
-}
+    txt += "📝 *Observação:* " + observacao + "%0A";
+  }
   txt += "💳 *Pagamento:* " + pgto + "%0A%0A";
   txt += "🛒 *Itens:*%0A";
   cart.forEach(i => txt += "- " + i.nome + " (" + r(i.preco) + ")%0A");
@@ -310,6 +311,7 @@ function enviarPedido() {
   document.getElementById("nome").value = "";
   document.getElementById("telefone").value = "";
   document.getElementById("endereco").value = "";
+  document.getElementById("observacao").value = "";
   document.querySelectorAll('input[name="pgto"]').forEach(r => r.checked = false);
 }
 
