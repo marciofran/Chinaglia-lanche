@@ -30,7 +30,6 @@ button.add-btn{
   background:#ff7a00;color:#fff;cursor:pointer;font-size:20px;line-height:1;
 }
 
-/* CARRINHO CORRIGIDO PARA NÃO COBRIR O CARDÁPIO */
 .cart{
   position:fixed;bottom:0;left:0;right:0;
   background:#111;border-top:2px solid #333;
@@ -67,7 +66,6 @@ button.send-btn{
   background:#25d366;color:#fff;font-size:15px;font-weight:bold;cursor:pointer;
 }
 
-/* PEDIDOS SALVOS */
 #pedidos-section{padding:10px}
 #pedidos-section h2{color:#ffcc00;font-size:16px;margin-bottom:8px}
 .pedido-card{
@@ -213,7 +211,7 @@ function renderMenu() {
         <button class="add-btn" onclick='add(${JSON.stringify(item)})'>+</button>
       </div>`;
   });
-  div.innerHTML = htmlGenerado;
+  div.innerHTML = htmlGerado;
 }
 
 function add(item) { cart.push(item); renderCart(); }
