@@ -7,9 +7,22 @@
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
 body{font-family:sans-serif;background:#0f0f0f;color:#fff;padding-bottom:340px}
-h1{text-align:center;padding:16px;font-size:22px;color:#ffcc00}
+.header-container {
+  text-align:center;
+  padding:20px 16px 10px;
+  background:#000;
+}
+.brand-logo {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid #ffcc00;
+  margin-bottom: 12px;
+}
+h1{font-size:22px;color:#ffcc00}
 h1 span{color:#fff}
-#status{text-align:center;font-size:13px;padding:4px 0 10px}
+#status{font-size:13px;padding:8px 0 4px}
 
 .section-title{
   background:#cc0000;color:#ffcc00;font-weight:bold;font-size:14px;
@@ -96,10 +109,13 @@ nav button.active{color:#ffcc00;border-bottom:3px solid #ffcc00}
 </head>
 <body>
 
-<h1>🍔 Chinaglia <span>Lanches 2</span></h1>
-<p id="status"></p>
+<div class="header-container">
+  <img src="https://i.ibb.co/XfR7t3Y/image-79ebc4.png" alt="Mascote Chinaglia Lanches" class="brand-logo">
+  <h1>🍔 Chinaglia <span>Lanches 2</span></h1>
+  <p id="status"></p>
+</div>
 
-nav>
+<nav>
   <button onclick="showPage('cardapio')" id="tab-cardapio" class="active">🍔 Cardápio</button>
   <button onclick="showPage('pedidos')" id="tab-pedidos">🧾 Pedidos</button>
 </nav>
@@ -146,37 +162,37 @@ nav>
 const numero = "5519996426084";
 
 const menu = [
-  {cat:"🍔 Hambúrguer", nome:"Kids", preco:15, desc:"Hamburguer e Queijo Cheddar"},
-  {cat:"🍔 Hambúrguer", nome:"X-Salada", preco:22, desc:"Hamburguer, Tomate, Alface, Queijo e Maionese"},
-  {cat:"🍔 Hambúrguer", nome:"Hamburguer Simples", preco:24, desc:"Hamburguer, Tomate, Alface, Queijo, Milho, Batata Palha, Maionese e Bacon"},
-  {cat:"🍔 Hambúrguer", nome:"X-Egg", preco:25, desc:"Hamburguer, Ovo, Tomate, Alface, Queijo e Maionese"},
-  {cat:"🍔 Hambúrguer", nome:"Hamburguer de Costela", preco:31, desc:"Hamburguer de Costela, Ovo, Bacon, Tomate, Alface, Queijo, Cream Cheese e Maionese"},
-  {cat:"🍔 Hambúrguer", nome:"Hamburguer de Costela Vinagrete", preco:28, desc:"Hamburguer de Costela, Vinagrete, Queijo, Rúcula, Ovo e Maionese"},
-  {cat:"🍔 Hambúrguer", nome:"X-Bacon", preco:26, desc:"Hamburguer, Bacon, Cheddar, Tomate, Alface, Queijo e Maionese"},
-  {cat:"🍔 Hambúrguer", nome:"Americano Especial", preco:32, desc:"Hamburguer de Costela, Milho, Tomate, Alface, Queijo, Bacon, Catupiry, Presunto, Ovo e Maionese"},
-  {cat:"🍔 Hambúrguer", nome:"Mata Fome", preco:40, desc:"2 Hamburguers de Costela, Vinagrete, Alface, Bacon, Ovo, Presunto, Queijo, Milho, Ervilha, Catupiry e Maionese"},
-  {cat:"🥪 Simples", nome:"Americano", preco:26, desc:"Queijo, Presunto, Tomate, Alface, Ovo, Bacon e Maionese"},
-  {cat:"🥪 Simples", nome:"Misto Quente", preco:23, desc:"Queijo, Presunto, Tomate, Alface e Maionese"},
-  {cat:"🥪 Simples", nome:"Vegetariano", preco:27, desc:"Queijo, Tomate, Alface, Milho, Ervilha, Cebola, Maionese, Ovo e Azeitona Preta"},
-  {cat:"🥩 Filet", nome:"Filet", preco:35, desc:"Filet, Tomate, Rúcula, Queijo e Maionese"},
-  {cat:"🥩 Filet", nome:"Filet Vinagrete", preco:38, desc:"Filet, Vinagrete, Rúcula, Queijo, Bacon, Ovo, Cream Cheese e Maionese"},
-  {cat:"🥩 Filet", nome:"Filet Catupiry", preco:37, desc:"Filet, Catupiry, Tomate, Alface, Queijo, Presunto e Maionese"},
-  {cat:"🍗 Filé de Frango", nome:"X Frango", preco:33, desc:"Frango, Tomate, Alface, Queijo e Maionese"},
-  {cat:"🍗 Filé de Frango", nome:"Frango Catupiry", preco:35, desc:"Frango, Tomate, Alface, Queijo, Milho, Catupiry e Maionese"},
-  {cat:"🍗 Filé de Frango", nome:"Frango Max", preco:36, desc:"Frango, Vinagrete, Rúcula, Queijo, Ovo, Bacon, Cream Cheese e Maionese"},
-  {cat:"🌭 Cachorro Quente", nome:"X Doguinho", preco:20, desc:"Salsicha, Batata Palha, Bacon, Milho, Molho, Maionese e Catupiry"},
-  {cat:"🌭 Cachorro Quente", nome:"X Dogão", preco:28, desc:"3 Salsichas, Molho, Milho, Ervilha, Batata, Bacon, Vinagrete, Catupiry e Maionese"},
-  {cat:"🌭 Cachorro Quente", nome:"X Dogão com Frango", preco:32, desc:"3 Salsichas, Frango, Molho, Milho, Ervilha, Batata, Bacon, Vinagrete, Catupiry e Maionese"},
-  {cat:"🍟 Porções", nome:"Batata Frita Grande", preco:35, desc:"Porção de batata frita crocante"},
-  {cat:"🍟 Porções", nome:"Batata Frita Grande c/ Cheddar, Queijo e Bacon", preco:45, desc:"Batata frita com cheddar, queijo e bacon"},
-  {cat:"🍟 Porções", nome:"Kids", preco:22, desc:"Porção kids de batata frita"},
-  {cat:"🍟 Porções", nome:"Kids c/ Cheddar, Queijo e Bacon", preco:28, desc:"Porção kids com cheddar, queijo e bacon"},
-  {cat:"🥤 Bebidas", nome:"Suco de Laranja 300ml", preco:5, desc:"Suco natural de laranja"},
-  {cat:"🥤 Bebidas", nome:"Refrigerante Lata", preco:7, desc:"350ml"},
-  {cat:"🥤 Bebidas", nome:"Coca-Cola 600ml", preco:9, desc:"600ml"},
-  {cat:"🥤 Bebidas", nome:"Refrigerante 2 litros", preco:13, desc:"2 litros"},
-  {cat:"🥤 Bebidas", nome:"Coca-Cola 2 litros", preco:16, desc:"2 litros"},
-  {cat:"🥤 Bebidas", nome:"Água", preco:3, desc:"Água mineral"},
+  {cat:"🍔 HAMBÚRGUER", nome:"Kids", preco:15, desc:"Hamburguer e Queijo Cheddar"},
+  {cat:"🍔 HAMBÚRGUER", nome:"X-Salada", preco:22, desc:"Hamburguer, Tomate, Alface, Queijo e Maionese"},
+  {cat:"🍔 HAMBÚRGUER", nome:"Hamburguer Simples", preco:24, desc:"Hamburguer, Tomate, Alface, Queijo, Milho, Batata Palha, Maionese e Bacon"},
+  {cat:"🍔 HAMBÚRGUER", nome:"X-Egg", preco:25, desc:"Hamburguer, Ovo, Tomate, Alface, Queijo e Maionese"},
+  {cat:"🍔 HAMBÚRGUER", nome:"Hamburguer de Costela", preco:31, desc:"Hamburguer de Costela, Ovo, Bacon, Tomate, Alface, Queijo, Cream Cheese e Maionese"},
+  {cat:"🍔 HAMBÚRGUER", nome:"Hamburguer de Costela Vinagrete", preco:28, desc:"Hamburguer de Costela, Vinagrete, Queijo, Rúcula, Ovo e Maionese"},
+  {cat:"🍔 HAMBÚRGUER", nome:"X-Bacon", preco:26, desc:"Hamburguer, Bacon, Cheddar, Tomate, Alface, Queijo e Maionese"},
+  {cat:"🍔 HAMBÚRGUER", nome:"Americano Especial", preco:32, desc:"Hamburguer de Costela, Milho, Tomate, Alface, Queijo, Bacon, Catupiry, Presunto, Ovo e Maionese"},
+  {cat:"🍔 HAMBÚRGUER", nome:"Mata Fome", preco:40, desc:"2 Hamburguers de Costela, Vinagrete, Alface, Bacon, Ovo, Presunto, Queijo, Milho, Ervilha, Catupiry e Maionese"},
+  {cat:"🥪 SIMPLES", nome:"Americano", preco:26, desc:"Queijo, Presunto, Tomate, Alface, Ovo, Bacon e Maionese"},
+  {cat:"🥪 SIMPLES", nome:"Misto Quente", preco:23, desc:"Queijo, Presunto, Tomate, Alface e Maionese"},
+  {cat:"🥪 SIMPLES", nome:"Vegetariano", preco:27, desc:"Queijo, Tomate, Alface, Milho, Ervilha, Cebola, Maionese, Ovo e Azeitona Preta"},
+  {cat:"🥩 FILET", nome:"Filet", preco:35, desc:"Filet, Tomate, Rúcula, Queijo e Maionese"},
+  {cat:"🥩 FILET", nome:"Filet Vinagrete", preco:38, desc:"Filet, Vinagrete, Rúcula, Queijo, Bacon, Ovo, Cream Cheese e Maionese"},
+  {cat:"🥩 FILET", nome:"Filet Catupiry", preco:37, desc:"Filet, Catupiry, Tomate, Alface, Queijo, Presunto e Maionese"},
+  {cat:"¼ FILÉ DE FRANGO", nome:"X Frango", preco:33, desc:"Frango, Tomate, Alface, Queijo e Maionese"},
+  {cat:"¼ FILÉ DE FRANGO", nome:"Frango Catupiry", preco:35, desc:"Frango, Tomate, Alface, Queijo, Milho, Catupiry e Maionese"},
+  {cat:"¼ FILÉ DE FRANGO", nome:"Frango Max", preco:36, desc:"Frango, Vinagrete, Rúcula, Queijo, Ovo, Bacon, Cream Cheese e Maionese"},
+  {cat:"🌭 CACHORRO QUENTE", nome:"X Doguinho", preco:20, desc:"Salsicha, Batata Palha, Bacon, Milho, Molho, Maionese e Catupiry"},
+  {cat:"🌭 CACHORRO QUENTE", nome:"X Dogão", preco:28, desc:"3 Salsichas, Molho, Milho, Ervilha, Batata, Bacon, Vinagrete, Catupiry e Maionese"},
+  {cat:"🌭 CACHORRO QUENTE", nome:"X Dogão com Frango", preco:32, desc:"3 Salsichas, Frango, Molho, Milho, Ervilha, Batata, Bacon, Vinagrete, Catupiry e Maionese"},
+  {cat:"🍟 PORÇÕES", nome:"Batata Frita Grande", preco:35, desc:"Porção de batata frita crocante"},
+  {cat:"🍟 PORÇÕES", nome:"Batata Frita Grande c/ Cheddar, Queijo e Bacon", preco:45, desc:"Batata frita com cheddar, queijo e bacon"},
+  {cat:"🍟 PORÇÕES", nome:"Kids", preco:22, desc:"Porção kids de batata frita"},
+  {cat:"🍟 PORÇÕES", nome:"Kids c/ Cheddar, Queijo e Bacon", preco:28, desc:"Porção kids com cheddar, queijo e bacon"},
+  {cat:"🥤 BEBIDAS", nome:"Suco de Laranja 300ml", preco:5, desc:"Suco natural de laranja"},
+  {cat:"🥤 BEBIDAS", nome:"Refrigerante Lata", preco:7, desc:"350ml"},
+  {cat:"🥤 BEBIDAS", nome:"Coca-Cola 600ml", preco:9, desc:"600ml"},
+  {cat:"🥤 BEBIDAS", nome:"Refrigerante 2 litros", preco:13, desc:"2 litros"},
+  {cat:"🥤 BEBIDAS", nome:"Coca-Cola 2 litros", preco:16, desc:"2 litros"},
+  {cat:"🥤 BEBIDAS", nome:"Água", preco:3, desc:"Água mineral"},
 ];
 
 let cart = [];
