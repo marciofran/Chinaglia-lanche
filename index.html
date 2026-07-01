@@ -444,13 +444,17 @@ function enviarPedido() {
   document.querySelectorAll('input[name="pgto"]').forEach(r => r.checked = false);
 }
 
-
-
 renderMenu();
-// Força o status correto de fechado para a entrega
-const el = document.getElementById("status");
-el.style.color = "#ff4444";
-el.innerText = "🔴 Fechado - abre às 18h";
+
+// Força o fechamento após o carregamento de qualquer outra função intrusa
+setTimeout(() => {
+  const el = document.getElementById("status");
+  el.style.color = "#ff4444";
+  el.innerHTML = "🔴 Fechado - abre às 18h";
+}, 100);
+
+
+
 
 </script>
 </body>
