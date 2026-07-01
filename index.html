@@ -444,17 +444,7 @@ function enviarPedido() {
   document.querySelectorAll('input[name="pgto"]').forEach(r => r.checked = false);
 }
 
-function status() {
-  const h = new Date().getHours();
-  const el = document.getElementById("status");
-  if (h >= 18 && h < 23) {
-    el.style.color = "#00ff88";
-    el.innerText = "🟢 Aberto agora - Iracemápolis";
-  } else {
-    el.style.color = "#ff4444";
-    el.innerText = "🔴 Fechado - abre às 18h";
-  }
-}
+
 
 renderMenu();
 // Força o status correto de fechado para a entrega
