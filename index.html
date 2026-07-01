@@ -6,7 +6,7 @@
 <title>Chinaglia Lanches 2</title>
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
-body{font-family:sans-serif;background:#0f0f0f;color:#fff;padding-bottom:340px}
+body{font-family:sans-serif;background:#0f0f0f;color:#fff;padding-bottom:360px} /* Espaço para não cobrir o conteúdo */
 .header-container {
   text-align:center;
   padding:20px 16px 15px;
@@ -27,7 +27,7 @@ body{font-family:sans-serif;background:#0f0f0f;color:#fff;padding-bottom:340px}
   padding:8px 14px;margin:14px 10px 6px;border-radius:8px;
   text-transform:uppercase;letter-spacing:1px;
 }
-.card{
+.card {
   background:#1c1c1c;border-radius:12px;padding:10px 12px;
   margin:0 10px 8px;box-shadow:0 2px 10px rgba(0,0,0,0.4);
   display:flex;justify-content:space-between;align-items:center;gap:10px;
@@ -36,6 +36,21 @@ body{font-family:sans-serif;background:#0f0f0f;color:#fff;padding-bottom:340px}
 .title{font-weight:bold;font-size:14px;color:#fff}
 .desc{font-size:12px;color:#bbb;margin-top:3px}
 .price{color:#00ff88;font-weight:bold;font-size:14px;white-space:nowrap}
+
+/* Caixa moderna com emoji substituindo a imagem física */
+.product-icon-box {
+  width: 65px;
+  height: 65px;
+  background: #2a2a2a;
+  border: 1px solid #333;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 28px;
+  flex-shrink: 0;
+}
+
 button.add-btn{
   padding:7px 13px;border:none;border-radius:8px;
   background:#ff7a00;color:#fff;cursor:pointer;font-size:20px;line-height:1;
@@ -112,9 +127,6 @@ nav button.active{color:#ffcc00;border-bottom:3px solid #ffcc00}
   <p id="status"></p>
 </div>
 
-
-
-
 <nav>
   <button onclick="showPage('cardapio')" id="tab-cardapio" class="active">🍔 Cardápio</button>
   <button onclick="showPage('pedidos')" id="tab-pedidos">🧾 Pedidos</button>
@@ -157,6 +169,86 @@ nav button.active{color:#ffcc00;border-bottom:3px solid #ffcc00}
 
   <button class="send-btn" onclick="enviarPedido()">📲 Enviar Pedido pelo WhatsApp</button>
 </div>
+
+<script>
+// Mock do script de renderização para garantir que os itens exibam os ícones automáticos
+const produtos = [
+  { id: 1, categoria: "Burgers", nome: "X-Burguer Clássico", desc: "Pão, blend artesanal, queijo derretido e maionese especial.", preco: 22.90, icone: "🍔" },
+  { id: 2, categoria: "Burgers", nome: "X-Bacon Especial", desc: "Pão, blend artesanal, muito bacon crocante e cheddar.", preco: 26.90, icone: "🥓" },
+  { id: 3, categoria: "Combos", nome: "Combo Duplo + Batata", desc: "2 X-Burguers + Batata Frita Média + Refrigerante.", preco: 49.90, icone: "🍟" },
+  { id: 4, categoria: "Bebidas", nome: "Coca-Cola Lata", desc: "Gelada 350ml", preco: 6.00, icone: "🥤" },
+  { id: 5, categoria: "Sobremesas", nome: "Mini Churros Doce de Leite", desc: "Porção com 6 unidades polvilhadas com canela.", preco: 12.00, icone: "🍩" }
+];
+
+function renderMenu() {
+  const menuDiv = document.getElementById('menu');
+  let currentCategory = "";
+  let html = "";
+
+  produtos.forEach(prod => {
+    if (prod.categoria !== currentCategory) {
+      currentCategory = prod.categoria;
+      html += `<div class="section-title">${currentCategory}</div>`;
+    }
+    
+    html += `
+      <div class="card">
+        <div class="product-icon-box">${prod.icone}</div>
+        <div class="card-info">
+          <div class="title">${prod.nome}</div>
+          <div class="desc">${prod.desc}</div>
+          <div class="price">R$ ${prod.preco.toFixed(2).replace('.',',')}</div>
+        </div>
+        <button class="add-btn" onclick="adicionar(${prod.id})">+</button>
+      </div>
+    `;
+  });
+  
+  menuDiv.innerHTML = html;
+}
+
+function showPage(page) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('nav button').forEach(b => b.classList.remove('active'));
+  
+  document.getElementById(`page-${page}`).classList.add('active');
+  document.getElementById(`tab-${page}`).classList.add('active');
+}
+
+// Inicializa o menu ao carregar a página
+window.onload = function() {
+  renderMenu();
+  document.getElementById('status').innerText = "🟢 Aberto • Faça seu pedido";
+};
+
+// Funções fictícias para evitar erros no console (substitua ou integre com a sua lógica real se necessário)
+let carrinho = [];
+function adicionar(id) {
+  const p = produtos.find(item => item.id === id);
+  carrinho.push(p);
+  atualizarCarrinho();
+}
+function atualizarCarrinho() {
+  const lista = document.getElementById('cart-list');
+  const totalP = document.getElementById('total');
+  lista.innerHTML = "";
+  let total = 0;
+  carrinho.forEach((item, index) => {
+    total += item.preco;
+    lista.innerHTML += `<li>${item.nome} - R$ ${item.preco.toFixed(2).replace('.',',')} <button onclick="remover(${index})">❌</button></li>`;
+  });
+  totalP.innerText = `Total: R$ ${total.toFixed(2).replace('.',',')}`;
+}
+function remover(index) {
+  carrinho.splice(index, 1);
+  atualizarCarrinho();
+}
+function limparPedidos() { document.getElementById('lista-pedidos').innerHTML = '<div class="empty">Nenhum pedido registrado</div>'; }
+function enviarPedido() { alert("Pedido enviado com sucesso!"); }
+</script>
+
+</body>
+</html>
 
 <script>
 const numero = "5519996426084";
