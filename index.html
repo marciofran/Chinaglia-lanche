@@ -1,3 +1,5 @@
+
+
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -6,7 +8,7 @@
 <title>Chinaglia Lanches 2</title>
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
-body{font-family:sans-serif;background:#0f0f0f;color:#fff;padding-bottom:360px}
+body{font-family:sans-serif;background:#0f0f0f;color:#fff;padding-bottom:340px}
 .header-container {
   text-align:center;
   padding:20px 16px 15px;
@@ -20,27 +22,7 @@ body{font-family:sans-serif;background:#0f0f0f;color:#fff;padding-bottom:360px}
   border: 3px solid #ffcc00;
   box-shadow: 0 4px 15px rgba(255, 204, 0, 0.3);
 }
-
-/* Estilização do Status Automático */
-#status {
-  font-size: 14px;
-  padding: 10px 0 4px;
-  font-weight: bold;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 6px;
-}
-.status-bola {
-  width: 12px;
-  height: 12px;
-  border-radius: 50%;
-  display: inline-block;
-}
-.status-aberto { background: #00ff88; box-shadow: 0 0 8px #00ff88; }
-.status-fechado { background: #ff4444; box-shadow: 0 0 8px #ff4444; }
-.text-aberto { color: #00ff88; }
-.text-fechado { color: #ff4444; }
+#status{font-size:13px;padding:10px 0 4px}
 
 .section-title{
   background:#cc0000;color:#ffcc00;font-weight:bold;font-size:14px;
@@ -129,8 +111,11 @@ nav button.active{color:#ffcc00;border-bottom:3px solid #ffcc00}
   
 <div class="header-container">
   <img src="https://raw.githubusercontent.com/marciofran/Chinaglia-lanche/main/logo.png.jpg" alt="Chinaglia Lanches Logotipo" class="logo-chinaglia">
-  <div id="status"></div> <!-- Div corrigida para renderizar o status -->
+  <p id="status"></p>
 </div>
+
+
+
 
 <nav>
   <button onclick="showPage('cardapio')" id="tab-cardapio" class="active">🍔 Cardápio</button>
