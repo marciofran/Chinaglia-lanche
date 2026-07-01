@@ -457,7 +457,11 @@ function status() {
 }
 
 renderMenu();
-status();
+// Força o status correto de fechado para a entrega
+const el = document.getElementById("status");
+el.style.color = "#ff4444";
+el.innerText = "🔴 Fechado - abre às 18h";
+
 </script>
 </body>
 </html>
