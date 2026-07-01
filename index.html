@@ -6,7 +6,7 @@
 <title>Chinaglia Lanches 2</title>
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
-body{font-family:sans-serif;background:#0f0f0f;color:#fff;padding-bottom:360px} /* Espaço para não cobrir o conteúdo */
+body{font-family:sans-serif;background:#0f0f0f;color:#fff;padding-bottom:360px}
 .header-container {
   text-align:center;
   padding:20px 16px 15px;
@@ -20,14 +20,34 @@ body{font-family:sans-serif;background:#0f0f0f;color:#fff;padding-bottom:360px} 
   border: 3px solid #ffcc00;
   box-shadow: 0 4px 15px rgba(255, 204, 0, 0.3);
 }
-#status{font-size:13px;padding:10px 0 4px}
+
+/* Estilização do Status Automático */
+#status {
+  font-size: 14px;
+  padding: 10px 0 4px;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+}
+.status-bola {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  display: inline-block;
+}
+.status-aberto { background: #00ff88; box-shadow: 0 0 8px #00ff88; }
+.status-fechado { background: #ff4444; box-shadow: 0 0 8px #ff4444; }
+.text-aberto { color: #00ff88; }
+.text-fechado { color: #ff4444; }
 
 .section-title{
   background:#cc0000;color:#ffcc00;font-weight:bold;font-size:14px;
   padding:8px 14px;margin:14px 10px 6px;border-radius:8px;
   text-transform:uppercase;letter-spacing:1px;
 }
-.card {
+.card{
   background:#1c1c1c;border-radius:12px;padding:10px 12px;
   margin:0 10px 8px;box-shadow:0 2px 10px rgba(0,0,0,0.4);
   display:flex;justify-content:space-between;align-items:center;gap:10px;
@@ -36,21 +56,6 @@ body{font-family:sans-serif;background:#0f0f0f;color:#fff;padding-bottom:360px} 
 .title{font-weight:bold;font-size:14px;color:#fff}
 .desc{font-size:12px;color:#bbb;margin-top:3px}
 .price{color:#00ff88;font-weight:bold;font-size:14px;white-space:nowrap}
-
-/* Caixa moderna com emoji substituindo a imagem física */
-.product-icon-box {
-  width: 65px;
-  height: 65px;
-  background: #2a2a2a;
-  border: 1px solid #333;
-  border-radius: 8px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 28px;
-  flex-shrink: 0;
-}
-
 button.add-btn{
   padding:7px 13px;border:none;border-radius:8px;
   background:#ff7a00;color:#fff;cursor:pointer;font-size:20px;line-height:1;
@@ -124,7 +129,7 @@ nav button.active{color:#ffcc00;border-bottom:3px solid #ffcc00}
   
 <div class="header-container">
   <img src="https://raw.githubusercontent.com/marciofran/Chinaglia-lanche/main/logo.png.jpg" alt="Chinaglia Lanches Logotipo" class="logo-chinaglia">
-  <p id="status"></p>
+  <div id="status"></div> <!-- Div corrigida para renderizar o status -->
 </div>
 
 <nav>
@@ -169,6 +174,39 @@ nav button.active{color:#ffcc00;border-bottom:3px solid #ffcc00}
 
   <button class="send-btn" onclick="enviarPedido()">📲 Enviar Pedido pelo WhatsApp</button>
 </div>
+
+<script>
+// FUNÇÃO QUE CONTROLA O HORÁRIO AUTOMÁTICO
+function verificarHorario() {
+  const statusDiv = document.getElementById('status');
+  const agora = new Date();
+  const hora = agora.getHours();
+  
+  // Defina aqui a hora de abertura e fechamento (Exemplo: Abre às 18h e fecha às 23h)
+  const horaAbertura = 18;
+  const horaFechamento = 23;
+  
+  if (hora >= horaAbertura && hora < horaFechamento) {
+    statusDiv.innerHTML = `<span class="status-bola status-aberto"></span> <span class="text-aberto">Aberto • Faça seu pedido</span>`;
+  } else {
+    statusDiv.innerHTML = `<span class="status-bola status-fechado"></span> <span class="text-fechado">Fechado • No momento não estamos atendendo</span>`;
+  }
+}
+
+// Chame a função assim que a página carregar
+window.addEventListener('DOMContentLoaded', verificarHorario);
+
+function showPage(page) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('nav button').forEach(b => b.classList.remove('active'));
+  
+  document.getElementById(`page-${page}`).classList.add('active');
+  document.getElementById(`tab-${page}`).classList.add('active');
+}
+function limparPedidos() { document.getElementById('lista-pedidos').innerHTML = '<div class="empty">Nenhum pedido registrado</div>'; }
+</script>
+</body>
+</html>
 
 <script>
 // Mock do script de renderização para garantir que os itens exibam os ícones automáticos
