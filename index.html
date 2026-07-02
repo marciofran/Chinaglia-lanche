@@ -420,18 +420,23 @@ function enviarPedido() {
   const total = cart.reduce((s, i) => s + i.preco, 0);
 
   salvarPedido(nome, tel, endereco, observacao, pgto, cart, total);
-
-  let txt = "📦 *Pedido - Chinaglia Lanches 2*%0A%0A";
-  txt += "👤 *Cliente:* " + nome + "%0A";
-  txt += "📞 *Telefone:* " + tel + "%0A";
-  txt += "📍 *Endereço:* " + endereco + "%0A";
-  if (observacao) {
+  
+let txt = "📦 *Pedido - Chinaglia Lanches 2*%0A%0A";
+txt += "👤 *Cliente:* " + nome + "%0A";
+txt += "📞 *Telefone:* " + tel + "%0A";
+txt += "📍 *Endereço:* " + endereco + "%0A";
+if (observacao) {
     txt += "📝 *Observação:* " + observacao + "%0A";
-  }
-  txt += "💳 *Pagamento:* " + pgto + "%0A%0A";
-  txt += "🛒 *Itens:*%0A";
-  cart.forEach(i => txt += "- " + i.nome + " (" + r(i.preco) + ")%0A");
-  txt += "%0A💰 *Total: " + r(total) + "*";
+}
+txt += "💳 *Pagamento:* " + pgto + "%0A%0A";
+txt += "🛒 *Itens:*%0A";
+cart.forEach(i => txt += "- " + i.nome + " (" + r(i.preco) + ")%0A");
+
+let totalComEntrega = total + 5;
+txt += "%0A🛵 *Taxa de Entrega:* R$ 5,00%0A";
+txt += "💰 *Total Geral: " + r(totalComEntrega) + "*";
+
+  
 
   window.open("https://wa.me/" + numero + "?text=" + txt);
 
